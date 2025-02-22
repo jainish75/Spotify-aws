@@ -1,4 +1,6 @@
 **🎵 AWS ETL Pipeline for Spotify Data**
+
+
 **📌 Overview**
 This project implements an AWS-based ETL pipeline to process and analyze Spotify data. The pipeline ingests data from Amazon S3, transforms it using AWS Glue, and stores the processed data for querying with Amazon Athena and visualization in Amazon QuickSight.
 
