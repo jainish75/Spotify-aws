@@ -1,84 +1,71 @@
-AWS ETL Pipeline - Cost Optimization and Explanation
+**🎵 AWS ETL Pipeline for Spotify Data**
+**📌 Overview**
+This project implements an AWS-based ETL pipeline to process and analyze Spotify data. The pipeline ingests data from Amazon S3, transforms it using AWS Glue, and stores the processed data for querying with Amazon Athena and visualization in Amazon QuickSight.
 
-Overview
+**🏗️ Architecture**
 
-This document provides an overview of the AWS ETL pipeline for processing Spotify data and outlines strategies to minimize costs.
 
-Architecture Components
+S3 Staging: Raw Spotify data is stored in an Amazon S3 bucket.
 
-The ETL pipeline consists of the following AWS services:
+AWS Glue ETL: Extracts, transforms, and loads (ETL) the data.
 
-Amazon S3 (Staging & Data Warehouse) - Used to store raw and processed data.
+S3 Data Warehouse: Stores the processed data.
 
-AWS Glue ETL - Performs data transformation using Glue Jobs.
+AWS Glue Crawler: Creates a metadata catalog for querying.
 
-AWS Glue Crawler - Scans the processed data and creates metadata tables.
+Amazon Athena: Enables SQL-based querying on the processed data.
 
-Amazon Athena - Allows querying the data using SQL.
+Amazon QuickSight: Provides interactive data visualization and insights.
 
-Amazon QuickSight - Provides data visualization and reporting.
+🔧 AWS Glue ETL Pipeline
 
-Workflow Explanation
 
-Data Ingestion: Data is stored in an S3 bucket (Staging).
 
-ETL Processing:
+**💡 ETL Process Steps**
 
-Glue jobs perform transformations (joins, filtering, cleaning) and store processed data in another S3 bucket (Data Warehouse).
+Extract Data: Load data from multiple S3 sources.
 
-A Glue Crawler scans the processed data and updates the AWS Glue Data Catalog.
+Transform Data:
 
-Querying and Analysis:
+Join Album, Artist, and Track tables.
 
-Athena is used to execute queries on the Data Catalog.
+Drop unnecessary fields.
 
-QuickSight visualizes the results.
+Load Data: Store the cleaned dataset in an S3 bucket.
 
-Cost Optimization Strategies
+Analyze with Athena & Visualize with QuickSight.
 
-To minimize AWS costs, consider the following:
+**💰 Cost Optimization Tips**
 
-Amazon S3:
+To ensure zero or minimal costs, consider stopping the following services when not in use:
 
-Delete unnecessary raw and processed data.
+AWS Glue ETL Jobs: Stop scheduled jobs to avoid unnecessary executions.
 
-Use S3 Lifecycle Policies to move infrequent data to Glacier.
+AWS Glue Crawlers: Disable automatic crawlers if metadata updates are infrequent.
 
-AWS Glue:
+Amazon Athena Queries: Optimize queries to reduce S3 scanning costs.
 
-Reduce the number of Glue Job runs or use a lower Data Processing Unit (DPU) configuration.
+Amazon QuickSight: Downgrade to the free tier if no active dashboards are needed.
 
-Use AWS Lambda instead of Glue for lightweight transformations.
+Amazon S3: Use lifecycle policies to delete or archive unused data.
 
-Glue Crawler:
+**🚀 How to Run**
 
-Run crawlers on demand instead of on a schedule.
+Upload raw data to S3 Staging.
 
-Amazon Athena:
+Trigger the AWS Glue Job to process the data.
 
-Optimize queries by partitioning and compressing data.
+Run the AWS Glue Crawler to update metadata.
 
-Store data in columnar formats like Parquet to reduce query costs.
+Query the data using Amazon Athena.
 
-Amazon QuickSight:
+Visualize insights in Amazon QuickSight.
 
-Use SPICE for caching instead of running frequent queries.
+📌 Future Enhancements
 
-Ensure you use only the necessary number of QuickSight users to avoid extra charges.
+Implement AWS Lambda for event-driven ETL execution.
 
-Stopping Services to Achieve Zero Cost
+Optimize Glue jobs using PySpark for better performance.
 
-If you want to stop the pipeline and reduce costs to zero:
-
-Delete the S3 buckets or move data to Glacier.
-
-Stop all Glue Jobs and delete them if not needed.
-
-Delete Glue Crawlers and their metadata tables.
-
-Disable QuickSight or remove unnecessary dashboards.
-
-Stop using Athena (Athena charges per query execution).
-
-By following these steps, you can significantly reduce or eliminate AWS charges while keeping data available for future use.
+Automate cost monitoring with AWS Cost Explorer.
 
