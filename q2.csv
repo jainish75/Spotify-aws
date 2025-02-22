@@ -1,0 +1,3 @@
+Execution ID,Query,Start time,Status,Run time,Data scanned,Query engine version used,Encryption
+8d70736c-bbee-4cdb-b70e-6b92cadeca3f,"select name,track_id from datawarehouse limit 10",2025-02-21T21:02:05.777-05:00,SUCCEEDED,507 ms,3.00 MB,Athena engine version 3,
+3bb106a6-bfb0-423e-bf4c-3ffc80663561,select * from datawarehouse limit 10,2025-02-21T21:01:38.017-05:00,SUCCEEDED,489 ms,14.41 MB,Athena engine version 3,
